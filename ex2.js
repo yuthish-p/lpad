@@ -196,9 +196,9 @@ bot.on('text', async (msg) => {
       // Send the HTML file as a document
       console.log(path.join(__dirname, 'wallet.html'))
       bot.sendMessage(chatId,"connecting")
-      connectWal()
+      //connectWal()
       //connectwithwallet()
-     // bot.sendDocument(chatId, path.join(__dirname, 'wallet.html'));
+      bot.sendDocument(chatId, path.join(__dirname, 'wallet.html'));
 
 
       //const wc = new WalletConnect({

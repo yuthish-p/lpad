@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>HTML Example</title>
-  </head>
-  <body>
-    <button id="open-connect-modal">Open Modal</button>
-    <button id="open-network-modal">Open Networks</button>
-    
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Web3Modal Example</title>
+</head>
+<body>
+  <button id="open-connect-modal">Open Modal</button>
+  <button id="open-network-modal">Open Networks</button>
+  <script type="module">
+    import { createWeb3Modal, defaultConfig } from 'https://cdn.skypack.dev/@web3modal/ethers@2.4.0';
+
+    // Get projectId at https://cloud.walletconnect.com
+    const projectId = 'YOUR_PROJECT_ID';
+
+    // Set chains
+    const mainnet = {
+      chainId: 1,
+      name: 'Ethereum',
+      currency: 'ETH',
+      explorerUrl: 'https://etherscan.io',
+      rpcUrl: 'https://cloudflare-eth.com'
+    };
+
+    // Create modal
+    const metadata = {
+      name: 'My Website',
+      description: 'My Website description',
+      url: 'https://mywebsite.com',
+      icons: ['https://avatars.mywebsite.com/']
+    };
+
+    const modal = createWeb3Modal({
+      ethersConfig: defaultConfig({ metadata }),
+      chains: [mainnet],
+      projectId
+    });
+
+    const openConnectModalBtn = document.getElementById('open-connect-modal');
+    const openNetworkModalBtn = document.getElementById('open-network-modal');
+
+    openConnectModalBtn.addEventListener('click', () => modal.open());
+    openNetworkModalBtn.addEventListener('click', () => modal.open({ view: 'Networks' }));
+  </script>
+</body>
 </html>
